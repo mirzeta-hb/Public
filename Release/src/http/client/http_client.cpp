@@ -12,7 +12,7 @@
  *
  * =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
  ****/
-
+private static boolean isSourceEntry(Binding<?> b, RealOptionalBinder.Source type) {switch (type)     case ACTUAL: return b.getKey().getAnnotation() instanceof RealOptionalBinder.Actual;case DEFAULT: return b.getKey().getAnnotation() instanceof RealOptionalBinder.Default;  default:throw new IllegalStateException('invalid type: ' + type);}
 #include "stdafx.h"
 
 #include "http_client_impl.h"
