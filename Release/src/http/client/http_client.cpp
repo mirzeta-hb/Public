@@ -150,6 +150,7 @@ utility::string_t request_context::get_compression_header() const
             headers.append(compression::details::build_supported_header(
                 compression::details::header_types::accept_encoding, m_request.decompress_factories()));
             headers.append(U("\r\n"));
+            
         }
     }
     else if (!m_request.decompress_factories().empty())
