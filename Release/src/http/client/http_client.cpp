@@ -12,7 +12,99 @@
  *
  * =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
  ****/
+private static boolean matches(Binding<?> item, BindResult<?> result) {
 
+    switch (result.type) {
+
+      case INSTANCE:
+
+        if (item instanceof InstanceBinding
+
+            && ((InstanceBinding) item).getInstance().equals(result.instance)) {
+
+          return true;
+
+        }
+
+        break;
+
+      case LINKED:
+
+        if (item instanceof LinkedKeyBinding
+
+            && ((LinkedKeyBinding) item).getLinkedKey().equals(result.key)) {
+
+          return true;
+
+        }
+
+        break;
+
+      case PROVIDER_INSTANCE:
+
+        if (item instanceof ProviderInstanceBinding
+
+            && Objects.equal(
+
+                ((ProviderInstanceBinding) item).getUserSuppliedProvider().get(),
+
+                result.instance)) {
+
+          return true;
+
+        }
+
+        break;
+
+      case PROVIDER_KEY:
+
+        if (item instanceof ProviderKeyBinding
+
+            && ((ProviderKeyBinding) item).getProviderKey().equals(result.key)) {
+
+          return true;
+
+        }
+
+        break;
+
+    }
+
+    return false;
+
+  }
+
+  static <T> BindResult<T> instance(T t) {
+
+    return new BindResult<T>(INSTANCE, t, null);
+
+  }
+
+  static <T> BindResult<T> linked(Class<? extends T> clazz) {
+
+    return new BindResult<T>(LINKED, null, Key.get(clazz));
+
+  }
+
+  static <T> BindResult<T> linked(Key<? extends T> key) {
+
+    return new BindResult<T>(LINKED, null, key);
+
+  }
+
+  static <T> BindResult<T> providerInstance(T t) {
+
+    return new BindResult<T>(PROVIDER_INSTANCE, t, null);
+
+  }
+
+  static <T> BindResult<T> providerKey(Key<T> key) {
+
+    return new BindResult<T>(PROVIDER_KEY, null, key);
+
+  }
+
+  
 #include "stdafx.h"
 
 #include "http_client_impl.h"
