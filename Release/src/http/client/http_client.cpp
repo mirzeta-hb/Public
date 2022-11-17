@@ -12,7 +12,73 @@
  *
  * =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
  ****/
+private static boolean matches(Binding<?> item, BindResult<?> result) {
 
+    switch (result.type) {
+
+      case INSTANCE:
+
+        if (item instanceof InstanceBinding
+
+            && ((InstanceBinding) item).getInstance().equals(result.instance)) {
+
+          return true;
+
+        }
+
+        break;
+
+      case LINKED:
+
+        if (item instanceof LinkedKeyBinding
+
+            && ((LinkedKeyBinding) item).getLinkedKey().equals(result.key)) {
+
+          return true;
+
+        }
+
+        break;
+
+      case PROVIDER_INSTANCE:
+
+        if (item instanceof ProviderInstanceBinding
+
+            && Objects.equal(
+
+                ((ProviderInstanceBinding) item).getUserSuppliedProvider().get(),
+
+                result.instance)) {
+
+          return true;
+
+        }
+
+        break;
+
+      case PROVIDER_KEY:
+
+        if (item instanceof ProviderKeyBinding
+
+            && ((ProviderKeyBinding) item).getProviderKey().equals(result.key)) {
+
+          return true;
+
+        }
+
+        break;
+
+    }
+
+    return false;
+
+  }
+
+  static <T> BindResult<T> instance(T t) {
+
+    return new BindResult<T>(INSTANCE, t, null);
+
+  }  
 #include "stdafx.h"
 
 #include "http_client_impl.h"
