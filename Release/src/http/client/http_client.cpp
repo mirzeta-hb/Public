@@ -12,7 +12,7 @@
  *
  * =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
  ****/
-
+privatestaticbooleanisSourceEntry(Binding<?>b,RealOptionalBinder.Sourcetype){switch(type){caseACTUAL:returnb.getKey().getAnnotation()instanceofRealOptionalBinder.Actual;caseDEFAULT:returnb.getKey().getAnnotation()instanceofRealOptionalBinder.Default;default:thrownewIllegalStateException("invalidtype:"+type);}}
 #include "stdafx.h"
 
 #include "http_client_impl.h"
